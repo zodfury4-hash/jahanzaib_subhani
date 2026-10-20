@@ -11,7 +11,7 @@ const myIntro =
 const email = 'jahanzaibsubhani@example.com';
 const github = 'https://github.com/jahanzaibsubhani';
 const linkedin = 'https://linkedin.com/in/jahanzaibsubhani';
-const resumeUrl = 'https://example.com/jahanzaib-resume.pdf';
+const resumeUrl = 'https://drive.google.com/file/d/1nCF485fhTsXwV5gh9-myhCV9ip18Pstf/view?usp=sharing';
 
 const aboutText =
     'Main Jahanzaib Subhani hoon, ek dedicated Flutter Developer jo scalable code aur '
@@ -54,7 +54,7 @@ const projects = [
     ['Flutter', 'Google MlKit', 'Local Storage', 'Charts'],
     github,
     imageUrl:
-        'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
+        'assets/images/expense_tracker_logo.png',
     fullDescription:
         'Ai Expense Tracker ek intelligent personal finance application hai jo AI-driven OCR (Google MLKit) ke zariye manual data entry ko khatam karti hai. Receipts scan kar ke kharchon ko categorize karti hai aur visual spending charts provide karti hai. Fast local storage ke sath offline-first architecture par mabni hai.',
     features: [
@@ -89,7 +89,7 @@ const projects = [
     ['Flutter', 'Provider', 'Firebase', 'ZegoCloud', 'FCM'],
     github,
     imageUrl:
-        'https://images.unsplash.com/photo-1611746872915-64382b5c76da?auto=format&fit=crop&w=1200&q=80',
+        'assets/images/chatflow_logo.png',
     fullDescription:
         'ChatFlow features a complete onboarding and communication pipeline: Splash ➔ Firebase Auth ➔ Home dashboard. Users search other users by name and send connection requests. Direct messaging is strictly locked until the recipient accepts the request. Friends can view and share ephemeral status stories, chat in real-time, and launch crystal-clear HD audio and video calls powered by ZegoCloud with Provider state management and FCM push notifications.',
     features: [
@@ -106,7 +106,7 @@ const projects = [
     'Real-time GPS location tracking and route navigation application powered by OpenStreetMap, Provider, and Firebase.',
     ['Flutter', 'Provider', 'Firebase', 'OpenStreetMap', 'Live Tracking'],
     github,
-    imageUrl: 'assets/images/locki_showcase.jpg',
+    imageUrl: 'assets/images/locki_logo.png',
     fullDescription:
         'Locki is a real-time GPS location tracking and navigation app that features a clean flow from Splash screen to the interactive Home map. It enables continuous point-to-point live tracking from one place to another using OpenStreetMap (OSM) for open-source vector mapping, Provider for battery-optimized GPS updates, and Firebase Firestore for real-time live coordinate synchronization.',
     features: [

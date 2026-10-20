@@ -1,3 +1,4 @@
+import '../../utils/locki_bytes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,11 +16,11 @@ class LockiDetailPage extends StatefulWidget {
   static const String imageUrl = 'assets/images/locki_showcase.jpg';
   static const List<String> tags = [
     'Flutter',
-    'Provider',
-    'Firebase',
-    'OpenStreetMap',
-    'Geolocator',
-    'Live Tracking',
+    'Google Maps API',
+    'Offline Maps',
+    'Live GPS Tracking',
+    'AI Travel Planner',
+    'Itinerary Manager',
   ];
 
   @override
@@ -88,17 +89,9 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 1. Hero Image Banner
-                    FadeSlideIn(
-                      offset: const Offset(0, 30),
-                      child: _buildBanner(isDesktop),
-                    ),
-                    const SizedBox(height: 32),
-
-                    // 2. Title & Status
+                    // 1. Title & Status (Top Header)
                     FadeSlideIn(
                       offset: const Offset(0, 20),
-                      delay: const Duration(milliseconds: 150),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -183,6 +176,21 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
                       ),
                     ),
                     const SizedBox(height: 36),
+
+                    // 2. App Showcase & Screens (Interactive Row)
+                    FadeSlideIn(
+                      offset: const Offset(0, 30),
+                      delay: const Duration(milliseconds: 150),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildSectionHeader('App Showcase & Screens'),
+                          const SizedBox(height: 14),
+                          _buildScreenshotsRow(),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 36),
                     const Divider(color: line, height: 1),
                     const SizedBox(height: 36),
 
@@ -194,10 +202,9 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
                           _buildSectionHeader('Project Overview'),
                           const SizedBox(height: 14),
                           _buildInfoCard(
-                            'Locki is a high-precision live location tracking and navigation application designed to monitor real-time movement between locations. '
-                            'Featuring a streamlined architecture starting from a quick Splash screen directly to the main interactive Home screen, '
-                            'Locki leverages OpenStreetMap (OSM) for smooth, open-source cartography without proprietary map API limitations. '
-                            'With Provider state management and Firebase real-time data sync, the app renders dynamic route polylines, tracking speed, arrival estimates, and live coordinates between departure and arrival points.',
+                            'Locki is an advanced real-time navigation and intelligent trip tracking mobile application engineered with Flutter. '
+                            'Powered by high-precision Google Maps API and comprehensive offline map caching, Locki enables travelers to explore destinations, navigate live turn-by-turn routes, and organize multi-day itineraries even without cellular connectivity.\n\n'
+                            'From live GPS route calculation and offline region downloads to dedicated AI Travel Planning and collaborative trip management, Locki offers an all-in-one companion for road trips, city tours, and outdoor navigation.',
                           ),
                         ],
                       ),
@@ -217,18 +224,7 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
                     ),
                     const SizedBox(height: 36),
 
-                    // 5. Official UI Showcase Image
-                    InViewReveal(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSectionHeader('Official UI & Navigation Showcase'),
-                          const SizedBox(height: 14),
-                          _buildShowcaseImage(),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 36),
+
 
                     // 6. Complete Step-by-Step Workflow
                     InViewReveal(
@@ -261,14 +257,14 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildSectionHeader('Key Capabilities'),
+                          _buildSectionHeader('Key Capabilities & Features'),
                           const SizedBox(height: 16),
-                          _buildFeatureItem('Streamlined User Journey: Instant Splash initialization ➔ Full-featured interactive Home map screen.'),
-                          _buildFeatureItem('One-Place-to-Another Live Tracking: Continuous GPS route calculation and real-time movement polylines.'),
-                          _buildFeatureItem('OpenStreetMap (OSM) Integration: Crisp vector map tiles with custom neon location pins and smooth panning.'),
-                          _buildFeatureItem('Firebase Real-Time Synchronization: Location coordinates broadcast via Firestore snapshot streams.'),
-                          _buildFeatureItem('Provider State Architecture: Dedicated LocationProvider for battery-optimized GPS updates and UI responsiveness.'),
-                          _buildFeatureItem('Route Metrics: Dynamic calculation of travel distance, current speed, heading bearing, and estimated arrival time.'),
+                          _buildFeatureItem('Google Maps API Integration: High-accuracy live vector cartography, place autocomplete search, and turn-by-turn routing.'),
+                          _buildFeatureItem('Offline Map Download & Caching: Download regional map tiles and saved bookmarks for 100% offline navigation without internet.'),
+                          _buildFeatureItem('Real-Time Trip & GPS Route Tracking: Live speed odometer, distance counter, polyline paths, and heading bearings.'),
+                          _buildFeatureItem('AI Travel Planner Chat: Conversational itinerary generator tailoring recommendations based on dates, budget, and travel companions.'),
+                          _buildFeatureItem('Multi-Day Itinerary Management: Day-by-day scheduling with attraction selection, notes, bookings, and trip budget tracking.'),
+                          _buildFeatureItem('Saved Places & Bookmarks: Instant offline bookmarking for hotels, home, work, and favorite landmarks with category tags.'),
                         ],
                       ),
                     ),
@@ -312,66 +308,6 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
       ),)
         ]
     )
-    );
-  }
-
-  Widget _buildBanner(bool isDesktop) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        width: double.infinity,
-        height: isDesktop ? 440 : 260,
-        decoration: BoxDecoration(
-          color: const Color(0xFF030712),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: emerald.withValues(alpha: 0.3)),
-        ),
-        child: Image.asset(
-          'assets/images/locki_showcase.jpg',
-          fit: isDesktop ? BoxFit.cover : BoxFit.contain,
-          errorBuilder: (_, __, ___) => _buildFallbackBanner(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildShowcaseImage() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: const Color(0xFF030712),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: emerald.withValues(alpha: 0.35)),
-        boxShadow: [
-          BoxShadow(
-            color: emerald.withValues(alpha: 0.12),
-            blurRadius: 24,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Image.asset(
-        'assets/images/locki_showcase.jpg',
-        width: double.infinity,
-        fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => _buildFallbackBanner(),
-      ),
-    );
-  }
-
-  Widget _buildFallbackBanner() {
-    return Container(
-      width: double.infinity,
-      height: 280,
-      decoration: BoxDecoration(
-        color: cardBg,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: emerald.withValues(alpha: 0.3)),
-      ),
-      child: const Center(
-        child: Icon(Icons.map_rounded, size: 64, color: emeraldAccent),
-      ),
     );
   }
 
@@ -440,178 +376,135 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
   Widget _buildScreenFlowGrid(bool isDesktop) {
     final screens = [
       {
-        'screen': 'SPLASH SCREEN',
-        'icon': Icons.flash_on_rounded,
-        'badge': 'Startup & Permission Check',
+        'screen': 'EXPLORE & LIVE MAP',
+        'icon': Icons.explore_rounded,
+        'badge': 'Google Maps API Engine',
         'desc':
-            'Initial launch screen that checks GPS device hardware status, requests fine/coarse location permissions, '
-            'and establishes Firebase backend connectivity before transitioning to the map interface.',
+            'Interactive vector mapping dashboard with real-time location indicator, category chips (Food, Fuel, Hospitals), and smooth pinch-to-zoom camera controls.',
       },
       {
-        'screen': 'HOME MAP DASHBOARD',
-        'icon': Icons.navigation_rounded,
-        'badge': 'OpenStreetMap & Real-Time Tracking',
+        'screen': 'OFFLINE MAP DOWNLOAD',
+        'icon': Icons.cloud_download_rounded,
+        'badge': 'Offline Storage & Cache',
         'desc':
-            'Full-screen OpenStreetMap view featuring current location marker, destination search, '
-            'live route polyline drawing between two places, distance counter, speed odometer, and live tracking controls.',
+            'Download and cache high-resolution map tiles directly to local storage (SQLite / Hive). Navigate seamlessly in remote areas with 0% cellular data usage.',
+      },
+      {
+        'screen': 'TRIP & GPS TRACKING',
+        'icon': Icons.navigation_rounded,
+        'badge': 'Live Route & Odometer',
+        'desc':
+            'Real-time point-to-point GPS navigation with dynamic road polylines, digital speed odometer, accurate ETA calculation, and turn-by-turn guidance.',
+      },
+      {
+        'screen': 'AI TRAVEL PLANNER',
+        'icon': Icons.smart_toy_rounded,
+        'badge': 'Automated Itineraries',
+        'desc':
+            'Conversational AI travel assistant that crafts customized multi-day travel plans, suggests must-visit attractions, and adapts to user budget and companions.',
+      },
+      {
+        'screen': 'SAVED PLACES & PINS',
+        'icon': Icons.bookmark_added_rounded,
+        'badge': 'Bookmarks & Favorites',
+        'desc':
+            'Save personal destinations, hotels, and landmarks into custom collections (Home, Work, Landmark, Vacation) with one-tap offline retrieval.',
+      },
+      {
+        'screen': 'SETTINGS & PRIVACY',
+        'icon': Icons.tune_rounded,
+        'badge': 'Preferences & Storage',
+        'desc':
+            'Personalized controls for Dark/Light mode theme switching, offline storage management (clear/manage map cache), unit preferences, and push alerts.',
       },
     ];
 
-    if (isDesktop) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: screens.map((s) {
-          return Expanded(
-            child: HoverElevate(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 6),
-                padding: const EdgeInsets.all(22),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF10121A),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: emerald.withValues(alpha: 0.28)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: emerald.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: emeraldAccent.withValues(alpha: 0.45)),
-                          ),
-                          child: Icon(s['icon'] as IconData, color: emeraldAccent, size: 28),
-                        ),
-                        const SizedBox(width: 14),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                s['screen'] as String,
-                                style: GoogleFonts.spaceGrotesk(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: emerald.withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text(
-                                  s['badge'] as String,
-                                  style: const TextStyle(
-                                    color: emeraldAccent,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      s['desc'] as String,
-                      style: const TextStyle(
-                        fontSize: 14.5,
-                        height: 1.55,
-                        color: Color(0xFFC7CBD6),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        }).toList(),
-      );
-    }
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cols = constraints.maxWidth > 950 ? 3 : (constraints.maxWidth > 600 ? 2 : 1);
+        final w = (constraints.maxWidth - 16 * (cols - 1)) / cols;
 
-    return Column(
-      children: screens.map((s) {
-        return HoverElevate(
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            padding: const EdgeInsets.all(22),
-            decoration: BoxDecoration(
-              color: const Color(0xFF10121A),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: emerald.withValues(alpha: 0.28)),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
+        return Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: screens.map((s) {
+            return SizedBox(
+              width: w,
+              child: HoverElevate(
+                translateY: -4,
+                child: Container(
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: emerald.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: emeraldAccent.withValues(alpha: 0.45)),
+                    color: const Color(0xFF10121A),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: emerald.withValues(alpha: 0.28)),
                   ),
-                  child: Icon(s['icon'] as IconData, color: emeraldAccent, size: 28),
-                ),
-                const SizedBox(width: 18),
-                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          Text(
-                            s['screen'] as String,
-                            style: GoogleFonts.spaceGrotesk(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: emerald.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(6),
+                              color: emerald.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: emeraldAccent.withValues(alpha: 0.45)),
                             ),
-                            child: Text(
-                              s['badge'] as String,
-                              style: const TextStyle(
-                                color: emeraldAccent,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                              ),
+                            child: Icon(s['icon'] as IconData, color: emeraldAccent, size: 26),
+                          ),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  s['screen'] as String,
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                    letterSpacing: 0.4,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  decoration: BoxDecoration(
+                                    color: emerald.withValues(alpha: 0.15),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    s['badge'] as String,
+                                    style: const TextStyle(
+                                      color: emeraldAccent,
+                                      fontSize: 10.5,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 14),
                       Text(
                         s['desc'] as String,
                         style: const TextStyle(
-                          fontSize: 14.5,
-                          height: 1.55,
+                          fontSize: 14,
+                          height: 1.5,
                           color: Color(0xFFC7CBD6),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          }).toList(),
         );
-      }).toList(),
+      },
     );
   }
 
@@ -771,4 +664,148 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
       },
     );
   }
+
+  Widget _buildScreenshotsRow() {
+    final screens = [
+      {'path': 'assets/images/locki/locki_logo.png', 'caption': 'BRAND LOGO'},
+      {'path': 'assets/images/locki/locki_1.png', 'caption': 'SPLASH SCREEN'},
+      {'path': 'assets/images/locki/locki_2.png', 'caption': 'EXPLORE MAP'},
+      {'path': 'assets/images/locki/locki_3.png', 'caption': 'SETTINGS & THEME'},
+      {'path': 'assets/images/locki/locki_4.png', 'caption': 'SAVED PLACES'},
+      {'path': 'assets/images/locki/locki_5.png', 'caption': 'SAVE NEW PLACE'},
+      {'path': 'assets/images/locki/locki_6.png', 'caption': 'MY TRIPS'},
+      {'path': 'assets/images/locki/locki_7.png', 'caption': 'AI TRAVEL PLANNER'},
+      {'path': 'assets/images/locki/locki_8.png', 'caption': 'DESTINATION SELECTOR'},
+      {'path': 'assets/images/locki/locki_9.png', 'caption': 'SELECTED DESTINATION'},
+      {'path': 'assets/images/locki/locki_10.png', 'caption': 'DATE PICKER CALENDAR'},
+      {'path': 'assets/images/locki/locki_11.png', 'caption': 'INVITE TRIPMATES'},
+      {'path': 'assets/images/locki/locki_12.png', 'caption': 'TRIP PREFERENCES'},
+      {'path': 'assets/images/locki/locki_13.png', 'caption': 'PICK ATTRACTIONS'},
+      {'path': 'assets/images/locki/locki_14.png', 'caption': 'TRIP DETAILS & COVER'},
+      {'path': 'assets/images/locki/locki_15.png', 'caption': 'DAILY ITINERARY'},
+      {'path': 'assets/images/locki/locki_16.png', 'caption': 'TRIP BUDGET & EXPENSE'},
+      {'path': 'assets/images/locki/locki_17.png', 'caption': 'ROUTE MAP OVERVIEW'},
+      {'path': 'assets/images/locki/locki_18.png', 'caption': 'TRIPMATES & BOOKINGS'},
+      {'path': 'assets/images/locki/locki_19.png', 'caption': 'LIVE GPS NAVIGATION'},
+    ];
+
+    return SizedBox(
+      height: 470,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 4),
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: screens.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 22),
+        itemBuilder: (context, index) {
+          final item = screens[index];
+          return _InteractiveLockiCard(
+            imagePath: item['path']!,
+            caption: item['caption']!,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _InteractiveLockiCard extends StatefulWidget {
+  final String imagePath;
+  final String caption;
+
+  const _InteractiveLockiCard({
+    required this.imagePath,
+    required this.caption,
+  });
+
+  @override
+  State<_InteractiveLockiCard> createState() => _InteractiveLockiCardState();
+}
+
+class _InteractiveLockiCardState extends State<_InteractiveLockiCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final filename = widget.imagePath.split('/').last;
+    final bytes = lockiScreensBytes[filename];
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 280),
+        curve: Curves.easeOutCubic,
+        transform: Matrix4.translationValues(0, _isHovered ? -16 : 0, 0),
+        width: 205,
+        decoration: BoxDecoration(
+          color: const Color(0xFF141721),
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(
+            color: _isHovered ? emeraldAccent : const Color(0xFF262C3D),
+            width: _isHovered ? 2.0 : 1.2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: _isHovered
+                  ? emerald.withValues(alpha: 0.35)
+                  : Colors.black.withValues(alpha: 0.45),
+              blurRadius: _isHovered ? 26 : 14,
+              offset: Offset(0, _isHovered ? 14 : 7),
+              spreadRadius: _isHovered ? 2 : 0,
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        child: Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    if (bytes != null && bytes.isNotEmpty)
+                      Image.memory(
+                        bytes,
+                        fit: BoxFit.cover,
+                        gaplessPlayback: true,
+                      )
+                    else
+                      Image.asset(
+                        widget.imagePath,
+                        fit: BoxFit.cover,
+                        gaplessPlayback: true,
+                        errorBuilder: (_, __, ___) => const Center(
+                          child: Icon(Icons.broken_image, color: Colors.white24),
+                        ),
+                      ),
+                    AnimatedOpacity(
+                      duration: const Duration(milliseconds: 250),
+                      opacity: _isHovered ? 0.0 : 0.05,
+                      child: Container(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 250),
+              style: TextStyle(
+                fontFamily: 'SpaceGrotesk',
+                color: _isHovered ? emeraldAccent : const Color(0xFF8B92A5),
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1.2,
+              ),
+              child: Text(widget.caption),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 }

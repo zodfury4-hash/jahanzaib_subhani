@@ -1,3 +1,6 @@
+import '../utils/chatflow_bytes.dart';
+import '../utils/locki_bytes.dart';
+import '../utils/expense_tracker_bytes.dart';
 import 'package:flutter/material.dart';
 
 import '../models/project.dart';
@@ -67,45 +70,64 @@ class _ProjectCardState extends State<ProjectCard> {
                 SizedBox(
                   height: 160,
                   width: double.infinity,
-                  child: p.imageUrl!.startsWith('assets/')
-                      ? Image.asset(
+                  child: Builder(
+                    builder: (context) {
+                      if (p.imageUrl!.contains('expense_tracker')) {
+                        final bytes = expenseTrackerScreensBytes['screen_1.png'] ?? expenseTrackerScreensBytes['screen_2.png'];
+                        if (bytes != null && bytes.isNotEmpty) {
+                          return Image.memory(
+                            bytes,
+                            fit: BoxFit.cover,
+                            gaplessPlayback: true,
+                          );
+                        }
+                      }
+                      if (p.imageUrl!.contains('chatflow')) {
+                        final bytes = ChatflowBytes.getBytes('assets/images/chatflow_logo.png');
+                        if (bytes != null && bytes.isNotEmpty) {
+                          return Image.memory(
+                            bytes,
+                            fit: BoxFit.contain,
+                            gaplessPlayback: true,
+                          );
+                        }
+                      }
+                      if (p.imageUrl!.contains('locki')) {
+                        final bytes = lockiScreensBytes['locki_card_banner.png'] ?? lockiScreensBytes['locki_logo.png'];
+                        if (bytes != null && bytes.isNotEmpty) {
+                          return Image.memory(
+                            bytes,
+                            fit: BoxFit.cover,
+                            gaplessPlayback: true,
+                          );
+                        }
+                      }
+                      if (p.imageUrl!.startsWith('assets/')) {
+                        return Image.asset(
                           p.imageUrl!,
                           fit: BoxFit.cover,
+                          gaplessPlayback: true,
                           errorBuilder: (context, error, stackTrace) => Container(
                             color: const Color(0xFF141720),
                             child: const Center(
                               child: Icon(Icons.flutter_dash, size: 40, color: emeraldAccent),
                             ),
                           ),
-                        )
-                      : Image.network(
-                          p.imageUrl!,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Container(
-                              color: const Color(0xFF141720),
-                              child: const Center(
-                                child: SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: emeraldAccent,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) => Container(
-                            color: const Color(0xFF141720),
-                            child: const Center(
-                              child: Icon(Icons.flutter_dash, size: 40, color: emeraldAccent),
-                            ),
+                        );
+                      }
+                      return Image.network(
+                        p.imageUrl!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: const Color(0xFF141720),
+                          child: const Center(
+                            child: Icon(Icons.flutter_dash, size: 40, color: emeraldAccent),
                           ),
                         ),
+                      );
+                    },
+                  ),
                 ),
-
               Padding(
                 padding: const EdgeInsets.all(22),
                 child: Column(

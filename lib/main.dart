@@ -12,6 +12,7 @@ void main() {
     final antonLoader = FontLoader('Anton');
     antonLoader.addFont(Future.value(ByteData.view(antonFontBytes.buffer)));
     antonLoader.load().catchError((_) {});
+
   } catch (_) {}
   runApp(const PortfolioApp());
 }
@@ -26,6 +27,7 @@ class PortfolioApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: buildTheme(),
       home: const PortfolioSplashPage(),
+
     );
   }
 }

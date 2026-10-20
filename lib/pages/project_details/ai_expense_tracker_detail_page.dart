@@ -1,3 +1,4 @@
+import '../../utils/expense_tracker_bytes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -82,17 +83,9 @@ class _AiExpenseTrackerDetailPageState extends State<AiExpenseTrackerDetailPage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 1. Hero Image Banner
-                    FadeSlideIn(
-                      offset: const Offset(0, 30),
-                      child: _buildBanner(isDesktop),
-                    ),
-                    const SizedBox(height: 32),
-
-                    // 2. Title & Status
+                    // 1. Title & Status (Top Header)
                     FadeSlideIn(
                       offset: const Offset(0, 20),
-                      delay: const Duration(milliseconds: 150),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -155,7 +148,7 @@ class _AiExpenseTrackerDetailPageState extends State<AiExpenseTrackerDetailPage>
                               );
                             }).toList(),
                           ),
-                          const SizedBox(height: 28),
+                          const SizedBox(height: 24),
                           Wrap(
                             spacing: 16,
                             runSpacing: 12,
@@ -177,8 +170,25 @@ class _AiExpenseTrackerDetailPageState extends State<AiExpenseTrackerDetailPage>
                       ),
                     ),
                     const SizedBox(height: 36),
+
+                    // 2. App Showcase & Screens (Interactive Row)
+                    FadeSlideIn(
+                      offset: const Offset(0, 30),
+                      delay: const Duration(milliseconds: 150),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildSectionHeader('App Showcase & Screens'),
+                          const SizedBox(height: 14),
+                          _buildScreenshotsRow(),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 36),
                     const Divider(color: line, height: 1),
                     const SizedBox(height: 36),
+
+
 
                     // 3. Overview
                     InViewReveal(
@@ -265,37 +275,6 @@ class _AiExpenseTrackerDetailPageState extends State<AiExpenseTrackerDetailPage>
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildBanner(bool isDesktop) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        width: double.infinity,
-        height: isDesktop ? 440 : 260,
-        color: cardBg,
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _buildFallbackBanner(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFallbackBanner() {
-    return Container(
-      width: double.infinity,
-      height: 280,
-      decoration: BoxDecoration(
-        color: cardBg,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: emerald.withValues(alpha: 0.3)),
-      ),
-      child: const Center(
-        child: Icon(Icons.receipt_long_rounded, size: 64, color: emeraldAccent),
       ),
     );
   }
@@ -417,6 +396,144 @@ class _AiExpenseTrackerDetailPageState extends State<AiExpenseTrackerDetailPage>
           }).toList(),
         );
       },
+    );
+  }
+
+  Widget _buildScreenshotsRow() {
+    final screens = [
+      {'path': 'assets/images/expense_tracker/screen_1.png', 'caption': 'BRAND LOGO'},
+      {'path': 'assets/images/expense_tracker/screen_2.png', 'caption': 'SPLASH SCREEN'},
+      {'path': 'assets/images/expense_tracker/screen_3.png', 'caption': 'CURRENCY SETUP'},
+      {'path': 'assets/images/expense_tracker/screen_4.png', 'caption': 'CATEGORIES'},
+      {'path': 'assets/images/expense_tracker/screen_5.png', 'caption': 'ADD ACCOUNT'},
+      {'path': 'assets/images/expense_tracker/screen_6.png', 'caption': 'DASHBOARD'},
+      {'path': 'assets/images/expense_tracker/screen_10.png', 'caption': 'MONTHLY BUDGET'},
+      {'path': 'assets/images/expense_tracker/screen_11.png', 'caption': 'RECORD EXPENSE'},
+      {'path': 'assets/images/expense_tracker/screen_13.png', 'caption': 'AI OCR SCANNER'},
+      {'path': 'assets/images/expense_tracker/screen_12.png', 'caption': 'IMPORT STATEMENT'},
+      {'path': 'assets/images/expense_tracker/screen_7.png', 'caption': 'ASSETS & LIABILITIES'},
+      {'path': 'assets/images/expense_tracker/screen_8.png', 'caption': 'ACCOUNTS & CARDS'},
+      {'path': 'assets/images/expense_tracker/screen_9.png', 'caption': 'TRANSACTIONS'},
+      {'path': 'assets/images/expense_tracker/screen_14.png', 'caption': 'SETTINGS'},
+    ];
+
+    return SizedBox(
+      height: 470,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 4),
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: screens.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 22),
+        itemBuilder: (context, index) {
+          final item = screens[index];
+          return _InteractiveAppCard(
+            imagePath: item['path']!,
+            caption: item['caption']!,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _InteractiveAppCard extends StatefulWidget {
+  final String imagePath;
+  final String caption;
+
+  const _InteractiveAppCard({
+    required this.imagePath,
+    required this.caption,
+  });
+
+  @override
+  State<_InteractiveAppCard> createState() => _InteractiveAppCardState();
+}
+
+class _InteractiveAppCardState extends State<_InteractiveAppCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 280),
+        curve: Curves.easeOutCubic,
+        transform: Matrix4.translationValues(0, _isHovered ? -16 : 0, 0),
+        width: 205,
+        decoration: BoxDecoration(
+          color: const Color(0xFF141721),
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(
+            color: _isHovered ? emeraldAccent : const Color(0xFF262C3D),
+            width: _isHovered ? 2.0 : 1.2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: _isHovered
+                  ? emerald.withValues(alpha: 0.35)
+                  : Colors.black.withValues(alpha: 0.45),
+              blurRadius: _isHovered ? 26 : 14,
+              offset: Offset(0, _isHovered ? 14 : 7),
+              spreadRadius: _isHovered ? 2 : 0,
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        child: Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Builder(
+                      builder: (context) {
+                        final filename = widget.imagePath.split('/').last;
+                        final bytes = expenseTrackerScreensBytes[filename];
+                        if (bytes != null && bytes.isNotEmpty) {
+                          return Image.memory(
+                            bytes,
+                            fit: BoxFit.cover,
+                            gaplessPlayback: true,
+                          );
+                        }
+                        return Image.asset(
+                          widget.imagePath,
+                          fit: BoxFit.cover,
+                          gaplessPlayback: true,
+                        );
+                      },
+                    ),
+                    // Subtle overlay gradient on hover
+                    AnimatedOpacity(
+                      duration: const Duration(milliseconds: 250),
+                      opacity: _isHovered ? 0.0 : 0.05,
+                      child: Container(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 250),
+              style: TextStyle(
+                fontFamily: 'SpaceGrotesk',
+                color: _isHovered ? emeraldAccent : const Color(0xFF8B92A5),
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1.2,
+              ),
+              child: Text(widget.caption),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

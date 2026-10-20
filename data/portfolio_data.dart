@@ -11,7 +11,7 @@ const myIntro =
 const email = 'you@example.com';
 const github = 'https://github.com/your-username';
 const linkedin = 'https://linkedin.com/in/your-username';
-const resumeUrl = 'https://example.com/your-resume.pdf';
+const resumeUrl = 'https://drive.google.com/file/d/1nCF485fhTsXwV5gh9-myhCV9ip18Pstf/view?usp=sharing';
 
 const aboutText =
     'Main ek Flutter developer hoon jise ek hi codebase se Android aur iOS apps '

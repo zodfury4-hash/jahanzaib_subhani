@@ -105,12 +105,6 @@ class HeroSection extends StatelessWidget {
                   child: CyberAmbientBackground(),
                 ),
 
-                // 1. Ambient Glass / Light Rings Painter in Background
-                Positioned.fill(
-                  child: CustomPaint(
-                    painter: _HeroWavePainter(),
-                  ),
-                ),
 
                 // 2. Giant Typography Behind the Person (FLUTTER DEV / DEVELOPER </>)
                 Positioned.fill(
