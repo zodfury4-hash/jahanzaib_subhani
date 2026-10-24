@@ -458,23 +458,13 @@ class _InteractiveAppCardState extends State<_InteractiveAppCard> {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Builder(
-                      builder: (context) {
-                        final filename = widget.imagePath.split('/').last;
-                        final bytes = expenseTrackerScreensBytes[filename];
-                        if (bytes != null && bytes.isNotEmpty) {
-                          return Image.memory(
-                            bytes,
-                            fit: BoxFit.fill,
-                            gaplessPlayback: true,
-                          );
-                        }
-                        return Image.asset(
-                          widget.imagePath,
-                          fit: BoxFit.fill,
-                          gaplessPlayback: true,
-                        );
-                      },
+                    Image.asset(
+                      widget.imagePath,
+                      fit: BoxFit.fill,
+                      gaplessPlayback: true,
+                      errorBuilder: (_, __, ___) => const Center(
+                        child: Icon(Icons.broken_image, color: Colors.white24),
+                      ),
                     ),
                     // Subtle overlay gradient on hover
                     AnimatedOpacity(
