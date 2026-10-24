@@ -668,7 +668,7 @@ class _AiArchitectDetailPageState extends State<AiArchitectDetailPage> {
     ];
 
     return SizedBox(
-      height: 450,
+      height: 500,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {
@@ -725,7 +725,7 @@ class _InteractiveArchCardState extends State<_InteractiveArchCard> {
         duration: const Duration(milliseconds: 280),
         curve: Curves.easeOutCubic,
         transform: Matrix4.translationValues(0, _isHovered ? -16 : 0, 0),
-        width: 205,
+        width: 220,
         decoration: BoxDecoration(
           color: const Color(0xFF141721),
           borderRadius: BorderRadius.circular(28),
@@ -744,7 +744,7 @@ class _InteractiveArchCardState extends State<_InteractiveArchCard> {
             ),
           ],
         ),
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 6),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
         child: Column(
           children: [
             Expanded(
@@ -756,13 +756,13 @@ class _InteractiveArchCardState extends State<_InteractiveArchCard> {
                     if (bytes != null && bytes.isNotEmpty)
                       Image.memory(
                         bytes,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                         gaplessPlayback: true,
                       )
                     else
                       Image.asset(
                         widget.imagePath,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                         gaplessPlayback: true,
                         errorBuilder: (_, __, ___) => const Center(
                           child: Icon(Icons.broken_image, color: Colors.white24),
