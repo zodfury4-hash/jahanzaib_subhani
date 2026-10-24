@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'data/portfolio_data.dart';
 import 'pages/portfolio_splash_page.dart';
 import 'theme/app_theme.dart';
+import 'utils/app_scroll_behavior.dart';
 import 'utils/anton_font_bytes.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class PortfolioApp extends StatelessWidget {
     return MaterialApp(
       title: '$myName - $myRole',
       debugShowCheckedModeBanner: false,
+      scrollBehavior: const AppScrollBehavior(),
       theme: buildTheme(),
       home: const PortfolioSplashPage(),
 

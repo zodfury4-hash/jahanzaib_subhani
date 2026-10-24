@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../models/project.dart';
 import '../theme/app_theme.dart';
-import '../utils/helpers.dart';
 import '../widgets/anim_effects.dart';
 
 class ProjectDetailPage extends StatefulWidget {
@@ -50,20 +49,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
             fontSize: 18,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.code, color: emeraldAccent),
-            tooltip: 'View Source Code',
-            onPressed: () => openUrl(project.codeLink),
-          ),
-          if (project.liveLink != null)
-            IconButton(
-              icon: const Icon(Icons.open_in_new, color: emeraldAccent),
-              tooltip: 'Live Demo',
-              onPressed: () => openUrl(project.liveLink!),
-            ),
-          const SizedBox(width: 12),
-        ],
+        actions: [],
       ),
       body: Column(
         children: [
@@ -136,36 +122,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                             }).toList(),
                           ),
                           const SizedBox(height: 30),
-                          Wrap(
-                            spacing: 16,
-                            runSpacing: 12,
-                            children: [
-                              FilledButton.icon(
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: emerald,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                ),
-                                icon: const Icon(Icons.code, size: 20),
-                                label: const Text('View Source Code', style: TextStyle(fontWeight: FontWeight.w700)),
-                                onPressed: () => openUrl(project.codeLink),
-                              ),
-                              if (project.liveLink != null)
-                                OutlinedButton.icon(
-                                  style: OutlinedButton.styleFrom(
-                                    foregroundColor: Colors.white,
-                                    side: const BorderSide(color: emeraldAccent),
-                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                  ),
-                                  icon: const Icon(Icons.launch, size: 20),
-                                  label: const Text('Live Demo', style: TextStyle(fontWeight: FontWeight.w700)),
-                                  onPressed: () => openUrl(project.liveLink!),
-                                ),
-                            ],
-                          ),
-                        ],
+                          ],
                       ),
                     ),
                     const SizedBox(height: 40),

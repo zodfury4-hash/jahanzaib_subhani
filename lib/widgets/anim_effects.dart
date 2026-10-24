@@ -188,10 +188,10 @@ class _HoverElevateState extends State<HoverElevate> {
             boxShadow: [
               BoxShadow(
                 color: _hovered
-                    ? glow.withValues(alpha: 0.22)
+                    ? glow.withValues(alpha: 0.16)
                     : Colors.transparent,
-                blurRadius: _hovered ? 24.0 : 0.0,
-                offset: _hovered ? const Offset(0, 8) : Offset.zero,
+                blurRadius: _hovered ? 12.0 : 0.0,
+                offset: _hovered ? const Offset(0, 4) : Offset.zero,
                 spreadRadius: 0.0,
               ),
             ],

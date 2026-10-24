@@ -40,7 +40,7 @@ class AboutSection extends StatelessWidget {
                     icon: Icons.rocket_launch_rounded,
                   ),
                   const _StatItem(
-                    value: '1+ yr',
+                    value: 'Almost 1 yr',
                     label: 'Experience',
                     icon: Icons.workspace_premium_rounded,
                   ),

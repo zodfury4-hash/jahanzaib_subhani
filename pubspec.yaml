@@ -31,6 +31,10 @@ flutter:
     - assets/images/expense_tracker/
     - assets/images/locki/
     - assets/images/chatflow/
+    - assets/images/stitch/
+    - assets/images/ai_architect/
+    - assets/images/matrix_pos/
+    - assets/images/ai_notezilla/
     - assets/fonts/
 
   fonts:

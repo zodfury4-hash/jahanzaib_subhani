@@ -187,7 +187,7 @@ class _FitnessSplashState extends State<FitnessSplash>
                                 style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.white.withOpacity(0.35),
+                                  color: Colors.white.withValues(alpha: 0.35),
                                   letterSpacing: 4,
                                 ),
                               ),
@@ -227,7 +227,7 @@ class _FitnessSplashState extends State<FitnessSplash>
               shape: BoxShape.circle,
               gradient: RadialGradient(
                 colors: [
-                  const Color(0xFF00F0FF).withOpacity(0.12),
+                  const Color(0xFF00F0FF).withValues(alpha: 0.12),
                   Colors.transparent,
                 ],
               ),
@@ -244,7 +244,7 @@ class _FitnessSplashState extends State<FitnessSplash>
               shape: BoxShape.circle,
               gradient: RadialGradient(
                 colors: [
-                  const Color(0xFF7000FF).withOpacity(0.08),
+                  const Color(0xFF7000FF).withValues(alpha: 0.08),
                   Colors.transparent,
                 ],
               ),
@@ -265,7 +265,7 @@ class _FitnessSplashState extends State<FitnessSplash>
           child: CircularProgressIndicator(
             strokeWidth: 2,
             valueColor: AlwaysStoppedAnimation<Color>(
-              const Color(0xFF00F0FF).withOpacity(0.5),
+              const Color(0xFF00F0FF).withValues(alpha: 0.5),
             ),
           ),
         ),
@@ -275,7 +275,7 @@ class _FitnessSplashState extends State<FitnessSplash>
           style: GoogleFonts.poppins(
             fontSize: 10,
             fontWeight: FontWeight.w600,
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
             letterSpacing: 4,
           ),
         ),
@@ -324,7 +324,7 @@ class _InfinityMotionPainter extends CustomPainter {
 
     // 1. Faint background trace (so the shape is always visible)
     final bgPaint = Paint()
-      ..color = const Color(0xFF00F0FF).withOpacity(0.08)
+      ..color = const Color(0xFF00F0FF).withValues(alpha: 0.08)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3
       ..strokeCap = StrokeCap.round;
@@ -400,7 +400,7 @@ class _InfinityMotionPainter extends CustomPainter {
         tangent.position,
         14,
         Paint()
-          ..color = const Color(0xFF00F0FF).withOpacity(0.3)
+          ..color = const Color(0xFF00F0FF).withValues(alpha: 0.3)
           ..style = PaintingStyle.fill
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10),
       );
@@ -422,7 +422,7 @@ class _InfinityMotionPainter extends CustomPainter {
         tailTangent.position,
         3,
         Paint()
-          ..color = const Color(0xFF00F0FF).withOpacity(0.6)
+          ..color = const Color(0xFF00F0FF).withValues(alpha: 0.6)
           ..style = PaintingStyle.fill,
       );
     }

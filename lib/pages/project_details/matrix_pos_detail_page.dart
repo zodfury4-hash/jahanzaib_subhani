@@ -1,9 +1,9 @@
+import 'package:flutter/gestures.dart';
+import '../../utils/matrix_pos_bytes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../data/portfolio_data.dart';
 import '../../theme/app_theme.dart';
-import '../../utils/helpers.dart';
 import '../../widgets/anim_effects.dart';
 
 class MatrixPosDetailPage extends StatefulWidget {
@@ -12,8 +12,7 @@ class MatrixPosDetailPage extends StatefulWidget {
   static const String title = 'Matrix POS';
   static const String tagline =
       'Point-of-Sale & retail management system with dual Admin and Cashier portals, local storage, bill printing, and auth.';
-  static const String imageUrl =
-      'https://images.unsplash.com/photo-1556742049-0a67e557224f?auto=format&fit=crop&w=1200&q=80';
+  static const String imageUrl = 'assets/images/matrix_pos_banner.png';
   static const List<String> tags = [
     'Flutter',
     'Provider',
@@ -65,14 +64,7 @@ class _MatrixPosDetailPageState extends State<MatrixPosDetailPage> {
             fontSize: 18,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.code, color: emeraldAccent),
-            tooltip: 'View Source Code',
-            onPressed: () => openUrl(github),
-          ),
-          const SizedBox(width: 12),
-        ],
+        actions: [],
       ),
       body: Column(
         children: [
@@ -89,38 +81,13 @@ class _MatrixPosDetailPageState extends State<MatrixPosDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 1. Hero Image Banner
-                    FadeSlideIn(
-                      offset: const Offset(0, 30),
-                      child: _buildBanner(isDesktop),
-                    ),
-                    const SizedBox(height: 32),
-
-                    // 2. Title & Status
+                    // 1. Title & Status (Top Header)
                     FadeSlideIn(
                       offset: const Offset(0, 20),
-                      delay: const Duration(milliseconds: 150),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: emerald.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: emeraldAccent.withValues(alpha: 0.4)),
-                            ),
-                            child: const Text(
-                              'RETAIL TECH • POINT-OF-SALE & INVENTORY AUTOMATION',
-                              style: TextStyle(
-                                color: emeraldAccent,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1.2,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
+                          
                           Text(
                             title,
                             style: GoogleFonts.spaceGrotesk(
@@ -163,23 +130,30 @@ class _MatrixPosDetailPageState extends State<MatrixPosDetailPage> {
                             }).toList(),
                           ),
                           const SizedBox(height: 28),
-                          Wrap(
-                            spacing: 16,
-                            runSpacing: 12,
-                            children: [
-                              FilledButton.icon(
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: emerald,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                ),
-                                icon: const Icon(Icons.code, size: 20),
-                                label: const Text('View Source Code', style: TextStyle(fontWeight: FontWeight.w700)),
-                                onPressed: () => openUrl(github),
-                              ),
-                            ],
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 36),
+
+                    // 2. Desktop Screens Showcase (Top UI Showcase)
+                    FadeSlideIn(
+                      offset: const Offset(0, 30),
+                      delay: const Duration(milliseconds: 150),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildSectionHeader('Desktop Terminal UI Showcase'),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Production desktop screens featuring cashier register shift controls, fast barcode billing, payment checkout, offline inventory management, and customer Khata ledger.',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color(0xFFC7CBD6),
+                              height: 1.5,
+                            ),
                           ),
+                          const SizedBox(height: 16),
+                          _buildScreenshotsRow(),
                         ],
                       ),
                     ),
@@ -305,36 +279,7 @@ class _MatrixPosDetailPageState extends State<MatrixPosDetailPage> {
     );
   }
 
-  Widget _buildBanner(bool isDesktop) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        width: double.infinity,
-        height: isDesktop ? 440 : 260,
-        color: cardBg,
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _buildFallbackBanner(),
-        ),
-      ),
-    );
-  }
 
-  Widget _buildFallbackBanner() {
-    return Container(
-      width: double.infinity,
-      height: 280,
-      decoration: BoxDecoration(
-        color: cardBg,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: emerald.withValues(alpha: 0.3)),
-      ),
-      child: const Center(
-        child: Icon(Icons.point_of_sale_rounded, size: 64, color: emeraldAccent),
-      ),
-    );
-  }
 
   Widget _buildSectionHeader(String title) {
     return Text(
@@ -662,6 +607,245 @@ class _MatrixPosDetailPageState extends State<MatrixPosDetailPage> {
           }).toList(),
         );
       },
+    );
+  }
+
+  Widget _buildScreenshotsRow() {
+    final screens = [
+      {
+        'path': 'assets/images/matrix_pos/pos_01_login.png',
+        'caption': 'ROLE-BASED LOGIN & AUTH',
+        'desc': 'Admin & Cashier portal access with secure offline credentials',
+        'aspect': 1024.0 / 476.0,
+      },
+      {
+        'path': 'assets/images/matrix_pos/pos_02_inventory.png',
+        'caption': 'INVENTORY & STOCK IN',
+        'desc': 'Product catalog, SKU management, pricing & stock add',
+        'aspect': 1024.0 / 475.0,
+      },
+      {
+        'path': 'assets/images/matrix_pos/pos_03_open_shift.png',
+        'caption': 'OPEN REGISTER SHIFT',
+        'desc': 'Cash drawer opening float, starting notes & shift begin',
+        'aspect': 1024.0 / 470.0,
+      },
+      {
+        'path': 'assets/images/matrix_pos/pos_04_active_sale.png',
+        'caption': 'HIGH-SPEED ACTIVE SALE',
+        'desc': 'Billing counter, item categories, barcode search & cart',
+        'aspect': 1024.0 / 475.0,
+      },
+      {
+        'path': 'assets/images/matrix_pos/pos_05_khata_customers.png',
+        'caption': 'CUSTOMERS & KHATA (UDHAAR)',
+        'desc': 'Customer directory, credit ledger & debt tracking',
+        'aspect': 832.0 / 822.0,
+      },
+      {
+        'path': 'assets/images/matrix_pos/pos_06_payment_checkout.png',
+        'caption': 'PAYMENT & CHECKOUT MODAL',
+        'desc': 'Cash, card, split payments, customer link & change calc',
+        'aspect': 1024.0 / 472.0,
+      },
+      {
+        'path': 'assets/images/matrix_pos/pos_07_thermal_receipt_print.png',
+        'caption': 'THERMAL BILL PRINT DIALOG',
+        'desc': 'Final 80mm ESC/POS receipt generation & physical printing',
+        'aspect': 1024.0 / 533.0,
+      },
+    ];
+
+    return SizedBox(
+      height: 380,
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.stylus,
+          },
+        ),
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 4),
+          scrollDirection: Axis.horizontal,
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          itemCount: screens.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 24),
+          itemBuilder: (context, index) {
+            final item = screens[index];
+            return _InteractivePosDesktopCard(
+              imagePath: item['path'] as String,
+              caption: item['caption'] as String,
+              desc: item['desc'] as String,
+              aspectRatio: item['aspect'] as double,
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _InteractivePosDesktopCard extends StatefulWidget {
+  final String imagePath;
+  final String caption;
+  final String desc;
+  final double aspectRatio;
+
+  const _InteractivePosDesktopCard({
+    required this.imagePath,
+    required this.caption,
+    required this.desc,
+    required this.aspectRatio,
+  });
+
+  @override
+  State<_InteractivePosDesktopCard> createState() => _InteractivePosDesktopCardState();
+}
+
+class _InteractivePosDesktopCardState extends State<_InteractivePosDesktopCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final bytes = MatrixPosBytes.getBytes(widget.imagePath);
+    // Desktop monitor card width
+    final cardWidth = widget.aspectRatio > 1.5 ? 540.0 : 360.0;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 280),
+        curve: Curves.easeOutCubic,
+        transform: Matrix4.translationValues(0, _isHovered ? -12 : 0, 0),
+        width: cardWidth,
+        decoration: BoxDecoration(
+          color: const Color(0xFF0F1118),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: _isHovered ? emeraldAccent : const Color(0xFF262C3D),
+            width: _isHovered ? 2.0 : 1.2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: _isHovered
+                  ? emerald.withValues(alpha: 0.35)
+                  : Colors.black.withValues(alpha: 0.5),
+              blurRadius: _isHovered ? 26 : 14,
+              offset: Offset(0, _isHovered ? 12 : 6),
+              spreadRadius: _isHovered ? 2 : 0,
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Window Header (Desktop Monitor Frame Bar)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF161924),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                border: Border(bottom: BorderSide(color: Colors.white.withValues(alpha: 0.06))),
+              ),
+              child: Row(
+                children: [
+                  Container(width: 9, height: 9, decoration: const BoxDecoration(color: Color(0xFFFF5F56), shape: BoxShape.circle)),
+                  const SizedBox(width: 6),
+                  Container(width: 9, height: 9, decoration: const BoxDecoration(color: Color(0xFFFFBD2E), shape: BoxShape.circle)),
+                  const SizedBox(width: 6),
+                  Container(width: 9, height: 9, decoration: const BoxDecoration(color: Color(0xFF27C93F), shape: BoxShape.circle)),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Matrix POS Desktop Terminal — ${widget.caption}',
+                      style: const TextStyle(
+                        color: Color(0xFF7A8398),
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.4,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Screen Display
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10)),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    if (bytes != null && bytes.isNotEmpty)
+                      Image.memory(
+                        bytes,
+                        fit: BoxFit.cover,
+                        gaplessPlayback: true,
+                      )
+                    else
+                      Image.asset(
+                        widget.imagePath,
+                        fit: BoxFit.cover,
+                        gaplessPlayback: true,
+                        errorBuilder: (_, __, ___) => const Center(
+                          child: Icon(Icons.broken_image, color: Colors.white24),
+                        ),
+                      ),
+                    AnimatedOpacity(
+                      duration: const Duration(milliseconds: 250),
+                      opacity: _isHovered ? 0.0 : 0.05,
+                      child: Container(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // Caption & description
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AnimatedDefaultTextStyle(
+                    duration: const Duration(milliseconds: 250),
+                    style: TextStyle(
+                      fontFamily: 'SpaceGrotesk',
+                      color: _isHovered ? emeraldAccent : Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.8,
+                    ),
+                    child: Text(widget.caption),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    widget.desc,
+                    style: const TextStyle(
+                      color: Color(0xFF8B92A5),
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w500,
+                      height: 1.3,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

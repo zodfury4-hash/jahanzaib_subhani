@@ -1,26 +1,27 @@
+import '../../utils/ai_notezilla_bytes.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../data/portfolio_data.dart';
 import '../../theme/app_theme.dart';
-import '../../utils/helpers.dart';
 import '../../widgets/anim_effects.dart';
 
 class NoteZillaDetailPage extends StatefulWidget {
   const NoteZillaDetailPage({super.key});
 
-  static const String title = 'NoteZilla';
+  static const String title = 'Ai NoteZilla';
   static const String tagline =
-      'Multimedia productivity suite for text, audio & video notes with Cloudinary storage, Firebase Auth, and real-time editing.';
-  static const String imageUrl =
-      'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=80';
+      'AI-powered intelligent notes studio with smart summarization, title generation, clarity polishing, and multimedia audio/video memos.';
+  static const String imageUrl = 'assets/images/ai_notezilla_card_banner.png';
   static const List<String> tags = [
     'Flutter',
     'Provider',
+    'AI Summarizer',
+    'Title Generator',
+    'Clarity & Tone',
+    'Audio & Video Notes',
     'Firebase',
     'Cloudinary',
-    'Audio & Video Notes',
-    'Auth',
   ];
 
   @override
@@ -65,14 +66,7 @@ class _NoteZillaDetailPageState extends State<NoteZillaDetailPage> {
             fontSize: 18,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.code, color: emeraldAccent),
-            tooltip: 'View Source Code',
-            onPressed: () => openUrl(github),
-          ),
-          const SizedBox(width: 12),
-        ],
+        actions: [],
       ),
       body: Column(
         children: [
@@ -103,24 +97,7 @@ class _NoteZillaDetailPageState extends State<NoteZillaDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: emerald.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: emeraldAccent.withValues(alpha: 0.4)),
-                            ),
-                            child: const Text(
-                              'PRODUCTIVITY • MULTIMEDIA NOTE-TAKING & CLOUD SYNC',
-                              style: TextStyle(
-                                color: emeraldAccent,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1.2,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
+                          
                           Text(
                             title,
                             style: GoogleFonts.spaceGrotesk(
@@ -163,23 +140,21 @@ class _NoteZillaDetailPageState extends State<NoteZillaDetailPage> {
                             }).toList(),
                           ),
                           const SizedBox(height: 28),
-                          Wrap(
-                            spacing: 16,
-                            runSpacing: 12,
-                            children: [
-                              FilledButton.icon(
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: emerald,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                ),
-                                icon: const Icon(Icons.code, size: 20),
-                                label: const Text('View Source Code', style: TextStyle(fontWeight: FontWeight.w700)),
-                                onPressed: () => openUrl(github),
-                              ),
-                            ],
-                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 36),
+
+                    // 2. App Showcase & Screens (Interactive Row)
+                    FadeSlideIn(
+                      offset: const Offset(0, 30),
+                      delay: const Duration(milliseconds: 150),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildSectionHeader('App Showcase & Screens'),
+                          const SizedBox(height: 14),
+                          _buildScreenshotsRow(),
                         ],
                       ),
                     ),
@@ -305,17 +280,25 @@ class _NoteZillaDetailPageState extends State<NoteZillaDetailPage> {
   }
 
   Widget _buildBanner(bool isDesktop) {
+    final bytes = AiNoteZillaBytes.getBytes('assets/images/ai_notezilla_card_banner.png');
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
         width: double.infinity,
         height: isDesktop ? 440 : 260,
         color: cardBg,
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _buildFallbackBanner(),
-        ),
+        child: bytes != null && bytes.isNotEmpty
+            ? Image.memory(
+                bytes,
+                fit: BoxFit.cover,
+                gaplessPlayback: true,
+              )
+            : Image.asset(
+                imageUrl,
+                fit: BoxFit.cover,
+                gaplessPlayback: true,
+                errorBuilder: (_, __, ___) => _buildFallbackBanner(),
+              ),
       ),
     );
   }
@@ -737,6 +720,150 @@ class _NoteZillaDetailPageState extends State<NoteZillaDetailPage> {
           }).toList(),
         );
       },
+    );
+  }
+
+  Widget _buildScreenshotsRow() {
+    final screens = [
+      {'path': 'assets/images/ai_notezilla/note_01_splash_screen.png', 'caption': 'SPLASH SCREEN'},
+      {'path': 'assets/images/ai_notezilla/note_02_ai_smart_summarizer.png', 'caption': 'AI SMART SUMMARIZER'},
+      {'path': 'assets/images/ai_notezilla/note_03_smart_title_generator.png', 'caption': 'SMART TITLE GENERATOR'},
+      {'path': 'assets/images/ai_notezilla/note_04_flawless_clarity_tone.png', 'caption': 'CLARITY & TONE POLISH'},
+      {'path': 'assets/images/ai_notezilla/note_05_auth_sign_in.png', 'caption': 'AUTH & SIGN IN'},
+      {'path': 'assets/images/ai_notezilla/note_06_home_multimedia_dashboard.png', 'caption': 'HOME DASHBOARD'},
+      {'path': 'assets/images/ai_notezilla/note_07_create_note_ai_assist.png', 'caption': 'CREATE NOTE & AI ASSIST'},
+      {'path': 'assets/images/ai_notezilla/note_08_audio_memo_recording.png', 'caption': 'AUDIO MEMO & WAVEFORM'},
+      {'path': 'assets/images/ai_notezilla/note_09_video_note_camera.png', 'caption': 'VIDEO NOTE CAMERA'},
+      {'path': 'assets/images/ai_notezilla/note_10_ai_assist_features.png', 'caption': 'AI ASSIST TOOLS'},
+      {'path': 'assets/images/ai_notezilla/note_11_search_and_filter_notes.png', 'caption': 'SEARCH & DATE FILTER'},
+      {'path': 'assets/images/ai_notezilla/note_12_app_settings.png', 'caption': 'APP SETTINGS'},
+    ];
+
+    return SizedBox(
+      height: 470,
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.stylus,
+          },
+        ),
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 4),
+          scrollDirection: Axis.horizontal,
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          itemCount: screens.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 22),
+          itemBuilder: (context, index) {
+            final item = screens[index];
+            return _InteractiveNoteZillaCard(
+              imagePath: item['path']!,
+              caption: item['caption']!,
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _InteractiveNoteZillaCard extends StatefulWidget {
+  final String imagePath;
+  final String caption;
+
+  const _InteractiveNoteZillaCard({
+    required this.imagePath,
+    required this.caption,
+  });
+
+  @override
+  State<_InteractiveNoteZillaCard> createState() => _InteractiveNoteZillaCardState();
+}
+
+class _InteractiveNoteZillaCardState extends State<_InteractiveNoteZillaCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final bytes = AiNoteZillaBytes.getBytes(widget.imagePath);
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 280),
+        curve: Curves.easeOutCubic,
+        transform: Matrix4.translationValues(0, _isHovered ? -16 : 0, 0),
+        width: 205,
+        decoration: BoxDecoration(
+          color: const Color(0xFF141721),
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(
+            color: _isHovered ? emeraldAccent : const Color(0xFF262C3D),
+            width: _isHovered ? 2.0 : 1.2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: _isHovered
+                  ? emerald.withValues(alpha: 0.35)
+                  : Colors.black.withValues(alpha: 0.45),
+              blurRadius: _isHovered ? 26 : 14,
+              offset: Offset(0, _isHovered ? 14 : 7),
+              spreadRadius: _isHovered ? 2 : 0,
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        child: Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    if (bytes != null && bytes.isNotEmpty)
+                      Image.memory(
+                        bytes,
+                        fit: BoxFit.cover,
+                        gaplessPlayback: true,
+                      )
+                    else
+                      Image.asset(
+                        widget.imagePath,
+                        fit: BoxFit.cover,
+                        gaplessPlayback: true,
+                        errorBuilder: (_, __, ___) => const Center(
+                          child: Icon(Icons.broken_image, color: Colors.white24),
+                        ),
+                      ),
+                    AnimatedOpacity(
+                      duration: const Duration(milliseconds: 250),
+                      opacity: _isHovered ? 0.0 : 0.05,
+                      child: Container(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 250),
+              style: TextStyle(
+                fontFamily: 'SpaceGrotesk',
+                color: _isHovered ? emeraldAccent : const Color(0xFF8B92A5),
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1.2,
+              ),
+              child: Text(widget.caption),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

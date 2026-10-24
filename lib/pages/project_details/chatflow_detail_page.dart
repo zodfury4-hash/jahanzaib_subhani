@@ -1,10 +1,9 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../data/portfolio_data.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/chatflow_bytes.dart';
-import '../../utils/helpers.dart';
 import '../../widgets/anim_effects.dart';
 
 class ChatFlowDetailPage extends StatefulWidget {
@@ -65,14 +64,7 @@ class _ChatFlowDetailPageState extends State<ChatFlowDetailPage> {
             fontSize: 18,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.code, color: emeraldAccent),
-            tooltip: 'View Source Code',
-            onPressed: () => openUrl(github),
-          ),
-          const SizedBox(width: 12),
-        ],
+        actions: [],
       ),
       body: Column(
         children: [
@@ -95,24 +87,7 @@ class _ChatFlowDetailPageState extends State<ChatFlowDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: emerald.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: emeraldAccent.withValues(alpha: 0.4)),
-                            ),
-                            child: const Text(
-                              'REAL-TIME WEBRTC • SECURE ENCRYPTED MESSAGING & CALLING',
-                              style: TextStyle(
-                                color: emeraldAccent,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1.2,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
+                          
                           Text(
                             title,
                             style: GoogleFonts.spaceGrotesk(
@@ -155,24 +130,7 @@ class _ChatFlowDetailPageState extends State<ChatFlowDetailPage> {
                             }).toList(),
                           ),
                           const SizedBox(height: 28),
-                          Wrap(
-                            spacing: 16,
-                            runSpacing: 12,
-                            children: [
-                              FilledButton.icon(
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: emerald,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                ),
-                                icon: const Icon(Icons.code, size: 20),
-                                label: const Text('View Source Code', style: TextStyle(fontWeight: FontWeight.w700)),
-                                onPressed: () => openUrl(github),
-                              ),
-                            ],
-                          ),
-                        ],
+                          ],
                       ),
                     ),
                     const SizedBox(height: 36),
@@ -711,10 +669,19 @@ class _ChatFlowDetailPageState extends State<ChatFlowDetailPage> {
 
     return SizedBox(
       height: 470,
-      child: ListView.separated(
+      child: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.stylus,
+          },
+        ),
+        child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 4),
         scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         itemCount: screens.length,
         separatorBuilder: (_, __) => const SizedBox(width: 22),
         itemBuilder: (context, index) {
@@ -724,6 +691,7 @@ class _ChatFlowDetailPageState extends State<ChatFlowDetailPage> {
             caption: item['caption']!,
           );
         },
+        ),
       ),
     );
   }

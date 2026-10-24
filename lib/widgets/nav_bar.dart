@@ -73,12 +73,10 @@ class NavBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: [
-                _SocialLink(label: 'GITHUB', url: github),
-                const SizedBox(height: 3),
+                _SocialLink(label: 'WHATSAPP', url: whatsapp),
+                const SizedBox(height: 4),
                 _SocialLink(label: 'LINKEDIN', url: linkedin),
-                const SizedBox(height: 3),
-                _SocialLink(label: 'TWITTER', url: 'https://twitter.com'),
-                const SizedBox(height: 3),
+                const SizedBox(height: 4),
                 _SocialLink(label: 'EMAIL', url: 'mailto:$email'),
               ],
             )
@@ -88,11 +86,18 @@ class NavBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.code, color: Colors.white, size: 20),
-                  onPressed: () => openUrl(github),
+                  icon: const Icon(Icons.chat_bubble_outline, color: emeraldAccent, size: 19),
+                  tooltip: 'WhatsApp',
+                  onPressed: () => openUrl(whatsapp),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.link, color: Colors.white, size: 20),
+                  tooltip: 'LinkedIn',
+                  onPressed: () => openUrl(linkedin),
                 ),
                 IconButton(
                   icon: const Icon(Icons.mail_outline, color: Colors.white, size: 20),
+                  tooltip: 'Email',
                   onPressed: () => openUrl('mailto:$email'),
                 ),
               ],
@@ -105,23 +110,37 @@ class NavBar extends StatelessWidget {
   }
 }
 
-class _SocialLink extends StatelessWidget {
+class _SocialLink extends StatefulWidget {
   final String label;
   final String url;
   const _SocialLink({required this.label, required this.url});
 
   @override
+  State<_SocialLink> createState() => _SocialLinkState();
+}
+
+class _SocialLinkState extends State<_SocialLink> {
+  bool _hovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => openUrl(url),
-      child: Text(
-        label,
-        style: const TextStyle(
-          fontFamily: 'SpaceGrotesk',
-          color: Color(0xFF9094A0),
-          fontSize: 11,
-          fontWeight: FontWeight.w700,
-          letterSpacing: 1.5,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: () => openUrl(widget.url),
+        child: AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          style: TextStyle(
+            fontFamily: 'SpaceGrotesk',
+            color: _hovered ? emeraldAccent : const Color(0xFF9094A0),
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.5,
+          ),
+          child: Text(widget.label),
         ),
       ),
     );

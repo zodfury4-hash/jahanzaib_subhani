@@ -100,8 +100,10 @@ class _ContactSectionState extends State<ContactSection> {
                       label: const Text('Send Message', style: TextStyle(fontWeight: FontWeight.w700)),
                       onPressed: () => sendMail(
                         email,
-                        subject: 'Portfolio message from ${_name.text}',
-                        body: _message.text,
+                        subject: _name.text.trim().isNotEmpty
+                            ? 'Portfolio message from ${_name.text.trim()}'
+                            : 'Portfolio Message',
+                        body: _message.text.trim(),
                       ),
                     ),
                   ),
@@ -114,9 +116,9 @@ class _ContactSectionState extends State<ContactSection> {
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),
-                      icon: const Icon(Icons.code, size: 18, color: emeraldAccent),
-                      label: const Text('GitHub'),
-                      onPressed: () => openUrl(github),
+                      icon: const Icon(Icons.chat_bubble_outline, size: 18, color: emeraldAccent),
+                      label: const Text('WhatsApp'),
+                      onPressed: () => openUrl(whatsapp),
                     ),
                   ),
                   HoverElevate(

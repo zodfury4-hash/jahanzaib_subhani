@@ -8,17 +8,18 @@ const myIntro =
     'Specialized in crafting pixel-perfect, high-performance Flutter apps for Android, iOS & Web. '
     'State management, REST APIs, Firebase & modern UI/UX.';
 
-const email = 'jahanzaibsubhani@example.com';
+const email = 'jahanzaibsubhani7@gmail.com';
 const github = 'https://github.com/jahanzaibsubhani';
-const linkedin = 'https://linkedin.com/in/jahanzaibsubhani';
-const resumeUrl = 'https://drive.google.com/file/d/1nCF485fhTsXwV5gh9-myhCV9ip18Pstf/view?usp=sharing';
+const linkedin = 'https://www.linkedin.com/in/jahanzaib-subhani-7722853bb';
+const whatsapp = 'https://wa.me/message/TVCPECXDWXMOK1';
+const resumeUrl = 'https://drive.google.com/file/d/1QSPpBNks6Ma56cZO8D3jM5Wdo19cI6Lk/view?usp=sharing';
 
 const aboutText =
-    'Main Jahanzaib Subhani hoon, ek dedicated Flutter Developer jo scalable code aur '
-    'smooth user experience ke saath Android aur iOS applications design aur develop karta hoon. '
-    'Clean architecture, robust state management (Bloc/Provider), aur fluid animations mere daily tools hain.';
+    'I am Jahanzaib Subhani, a dedicated and passionate Flutter Developer who designs and develops '
+    'high-performance, scalable mobile applications for Android and iOS with clean architecture and fluid user experiences. '
+    'Modern design systems, clean code, and intuitive animations are at the heart of my development process.';
 
-const stats = {'Projects': '6+', 'Experience': '1+ yr', 'Platforms': 'Android, iOS, Web'};
+const stats = {'Projects': '6+', 'Experience': 'Almost 1 year', 'Platforms': 'Android, iOS, Web'};
 
 const skillGroups = {
   'Framework & Core': ['Flutter', 'Dart', 'State Management'],
@@ -49,9 +50,26 @@ const experiences = [
 
 const projects = [
   Project(
+    'AI Architect',
+    '3D building & floor planning studio with AI layout generation, interactive isometric visualization, and BOQ cost estimation.',
+    ['Flutter', 'Provider', '3D Floor Planning', 'AI Layouts', 'Cost Estimator'],
+    github,
+    imageUrl: 'assets/images/ai_architect_card_banner.png',
+    fullDescription:
+        'AI Architect is a modern 3D building and floor planning studio designed to transform plot dimensions into intelligent, livable architectural floor plans and interactive 3D models before construction. Featuring localized subcontinental land unit support (Marla, Kanal, Sq Ft, Gaj), 6+ modern villa layout variations, and real-time structural BOQ construction cost estimation in PKR Lakhs.',
+    features: [
+      'Interactive 3D isometric building model with 360-degree orbit and section tap zoom',
+      'Millimeter-accurate 2D architectural CAD floor blueprints (Ground Floor & Terrace)',
+      'Automated BOQ construction budget & materials estimator in Pakistani Rupee (PKR)',
+      'Subcontinental and global land standards: Marla (225 / 250 / 272 sq ft), Kanal, Sq Ft, Gaj',
+      'AI-powered architectural program customization: plot frontage, depth, and road facing',
+      'Comprehensive material specification reports: RCC concrete frame, UPVC windows, porcelain tiles',
+    ],
+  ),
+  Project(
     'Ai Expense Tracker',
     'AI-powered financial expense manager with receipt scanning & automated budget analytics.',
-    ['Flutter', 'Google MlKit', 'Local Storage', 'Charts'],
+    ['Flutter', 'Provider', 'Google MlKit', 'Local Storage', 'Charts'],
     github,
     imageUrl:
         'assets/images/expense_tracker_logo.png',
@@ -71,7 +89,7 @@ const projects = [
     ['Flutter', 'Provider', 'Firebase', 'Cloudinary', 'FCM'],
     github,
     imageUrl:
-        'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80',
+        'assets/images/stitch_logo.png',
     fullDescription:
         'Stitch&Witch is an end-to-end bespoke fashion and tailoring platform featuring 3 dedicated role portals: Tailor, Client, and Admin. Tailors upload product catalogs with high-res photos to Cloudinary CDN, categorized in the Client app. Clients place custom measurement orders, tailors accept requests in real-time, and clients receive live interactive order tracking powered by Firebase Firestore and FCM notifications.',
     features: [
@@ -119,21 +137,20 @@ const projects = [
     ],
   ),
   Project(
-    'NoteZilla',
-    'Multimedia productivity suite for text, audio & video notes with Cloudinary storage, Firebase Auth, and real-time editing.',
-    ['Flutter', 'Provider', 'Firebase', 'Cloudinary', 'Audio & Video Notes'],
+    'Ai NoteZilla',
+    'AI-powered intelligent notes studio with smart summarization, title generation, clarity polishing, and multimedia audio/video memos.',
+    ['Flutter', 'Provider', 'AI Summarizer', 'Voice & Video Notes', 'Firebase', 'Cloudinary'],
     github,
-    imageUrl:
-        'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'assets/images/ai_notezilla_card_banner.png',
     fullDescription:
-        'NoteZilla is a multimedia notes application allowing users to capture Text notes, Voice/Audio notes, and recorded Video notes. Built with Firebase Authentication and Cloud Firestore for real-time note storage, heavy video and audio files are uploaded directly to Cloudinary CDN for instant playback. Users can create, organize, and edit existing notes at any time.',
+        'Ai NoteZilla is an intelligent AI-assisted notes and productivity suite featuring instant smart article summarization, automated title generation, and grammar/tone clarity polishing. Beyond rich text notes, users can record voice memos with real-time waveform visualization and capture video notes uploaded seamlessly to Cloudinary CDN with Firebase synchronization.',
     features: [
-      'Triple-format note engine: Text notes, Audio voice memos, and Video notes',
-      'Direct Cloudinary CDN upload and adaptive streaming for audio and video media',
-      'Firebase Authentication for secure individual user account access',
-      'Firebase Cloud Firestore for real-time note metadata, tags, and timestamps',
-      'Full in-app editability allowing users to revise note text and media attachments',
-      'Built with Provider state management for smooth reactive note manipulation',
+      'AI Smart Summarizer: Converts long articles and meeting notes into concise bullet summaries',
+      'Smart Title Generator: Creates professional, catchy, and meaningful note headings tailored to content',
+      'Flawless Clarity & Tone: Polishes sentence structure, grammar, and flow for executive reading',
+      'Multimedia Note Suite: Text notes, real-time waveform Audio Memos, and direct Video notes',
+      'Fast Search & Filter: Instant keyword search and date-based note directory filtering',
+      'Cloud Architecture: Firebase Auth, real-time Firestore sync, and Cloudinary media streaming',
     ],
   ),
   Project(
@@ -142,7 +159,7 @@ const projects = [
     ['Flutter', 'Provider', 'Local Storage', 'Thermal Printing', 'Dual Portals'],
     github,
     imageUrl:
-        'https://images.unsplash.com/photo-1556742049-0a67e557224f?auto=format&fit=crop&w=1200&q=80',
+        'assets/images/matrix_pos_card_banner.png',
     fullDescription:
         'Matrix POS is an offline-first retail Point-of-Sale system built with Role-Based Authentication and 2 dedicated portals: Admin and Cashier. The Admin portal allows store owners to register inventory items and onboard cashier staff. The Cashier portal enables fast retail checkout, automatic cart totals, and physical receipt printing via Bluetooth/USB thermal printers. Powered by high-speed Local Storage, it operates without internet delays.',
     features: [
