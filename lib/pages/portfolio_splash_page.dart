@@ -24,7 +24,7 @@ class _PortfolioSplashPageState extends State<PortfolioSplashPage>
 
     _progressController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2800),
+      duration: const Duration(milliseconds: 1400),
     );
 
     _progressAnim = CurvedAnimation(

@@ -77,7 +77,10 @@ class NavBar extends StatelessWidget {
                 const SizedBox(height: 4),
                 _SocialLink(label: 'LINKEDIN', url: linkedin),
                 const SizedBox(height: 4),
-                _SocialLink(label: 'EMAIL', url: 'mailto:$email'),
+                _SocialLink(
+                  label: 'EMAIL',
+                  url: 'https://mail.google.com/mail/?view=cm&fs=1&to=$email',
+                ),
               ],
             )
           else if (compact)
@@ -98,7 +101,7 @@ class NavBar extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.mail_outline, color: Colors.white, size: 20),
                   tooltip: 'Email',
-                  onPressed: () => openUrl('mailto:$email'),
+                  onPressed: () => openUrl('https://mail.google.com/mail/?view=cm&fs=1&to=$email'),
                 ),
               ],
             )
