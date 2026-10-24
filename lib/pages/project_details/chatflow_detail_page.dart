@@ -668,7 +668,7 @@ class _ChatFlowDetailPageState extends State<ChatFlowDetailPage> {
     ];
 
     return SizedBox(
-      height: 470,
+      height: 450,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {
@@ -744,7 +744,7 @@ class _InteractiveChatflowCardState extends State<_InteractiveChatflowCard> {
             ),
           ],
         ),
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 6),
         child: Column(
           children: [
             Expanded(
@@ -777,7 +777,7 @@ class _InteractiveChatflowCardState extends State<_InteractiveChatflowCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 250),
               style: TextStyle(

@@ -675,7 +675,7 @@ class _StitchAndWitchDetailPageState extends State<StitchAndWitchDetailPage> {
     ];
 
     return SizedBox(
-      height: 470,
+      height: 450,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {
@@ -751,7 +751,7 @@ class _InteractiveStitchCardState extends State<_InteractiveStitchCard> {
             ),
           ],
         ),
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 6),
         child: Column(
           children: [
             Expanded(
@@ -784,7 +784,7 @@ class _InteractiveStitchCardState extends State<_InteractiveStitchCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 250),
               style: TextStyle(

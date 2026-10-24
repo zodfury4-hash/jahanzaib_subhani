@@ -83,12 +83,7 @@ class _NoteZillaDetailPageState extends State<NoteZillaDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 1. Hero Image Banner
-                    FadeSlideIn(
-                      offset: const Offset(0, 30),
-                      child: _buildBanner(isDesktop),
-                    ),
-                    const SizedBox(height: 32),
+
 
                     // 2. Title & Status
                     FadeSlideIn(
@@ -740,7 +735,7 @@ class _NoteZillaDetailPageState extends State<NoteZillaDetailPage> {
     ];
 
     return SizedBox(
-      height: 470,
+      height: 450,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {
@@ -816,7 +811,7 @@ class _InteractiveNoteZillaCardState extends State<_InteractiveNoteZillaCard> {
             ),
           ],
         ),
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 6),
         child: Column(
           children: [
             Expanded(
@@ -849,7 +844,7 @@ class _InteractiveNoteZillaCardState extends State<_InteractiveNoteZillaCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 250),
               style: TextStyle(

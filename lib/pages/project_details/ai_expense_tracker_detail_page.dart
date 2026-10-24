@@ -375,7 +375,7 @@ class _AiExpenseTrackerDetailPageState extends State<AiExpenseTrackerDetailPage>
     ];
 
     return SizedBox(
-      height: 470,
+      height: 450,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {
@@ -449,7 +449,7 @@ class _InteractiveAppCardState extends State<_InteractiveAppCard> {
             ),
           ],
         ),
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 6),
         child: Column(
           children: [
             Expanded(
@@ -486,7 +486,7 @@ class _InteractiveAppCardState extends State<_InteractiveAppCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 250),
               style: TextStyle(

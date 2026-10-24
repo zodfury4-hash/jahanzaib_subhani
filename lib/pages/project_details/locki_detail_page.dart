@@ -648,7 +648,7 @@ class _LockiDetailPageState extends State<LockiDetailPage> {
     ];
 
     return SizedBox(
-      height: 470,
+      height: 450,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {
@@ -725,7 +725,7 @@ class _InteractiveLockiCardState extends State<_InteractiveLockiCard> {
             ),
           ],
         ),
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 6),
         child: Column(
           children: [
             Expanded(
@@ -758,7 +758,7 @@ class _InteractiveLockiCardState extends State<_InteractiveLockiCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 250),
               style: TextStyle(
