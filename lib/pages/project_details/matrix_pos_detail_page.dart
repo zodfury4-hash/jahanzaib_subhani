@@ -712,7 +712,7 @@ class _InteractivePosDesktopCardState extends State<_InteractivePosDesktopCard> 
   Widget build(BuildContext context) {
     final bytes = MatrixPosBytes.getBytes(widget.imagePath);
     // Desktop monitor card width
-    final cardWidth = widget.aspectRatio > 1.5 ? 640.0 : 420.0;
+    final cardWidth = widget.aspectRatio > 1.5 ? 540.0 : 360.0;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -784,12 +784,14 @@ class _InteractivePosDesktopCardState extends State<_InteractivePosDesktopCard> 
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.asset(
-                      widget.imagePath,
-                      fit: BoxFit.fill,
-                      gaplessPlayback: true,
-                      errorBuilder: (_, __, ___) => const Center(
-                        child: Icon(Icons.broken_image, color: Colors.white24),
+                    Center(
+                      child: Image.asset(
+                        widget.imagePath,
+                        fit: BoxFit.contain,
+                        gaplessPlayback: true,
+                        errorBuilder: (_, __, ___) => const Center(
+                          child: Icon(Icons.broken_image, color: Colors.white24),
+                        ),
                       ),
                     ),
                     AnimatedOpacity(
