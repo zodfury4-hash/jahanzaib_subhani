@@ -719,6 +719,7 @@ class _InteractiveChatflowCardState extends State<_InteractiveChatflowCard> {
     final bytes = ChatflowBytes.getBytes(widget.imagePath);
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       child: MouseRegion(

@@ -719,6 +719,7 @@ class _InteractiveArchCardState extends State<_InteractiveArchCard> {
     final bytes = AiArchitectBytes.getBytes(widget.imagePath);
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       child: MouseRegion(

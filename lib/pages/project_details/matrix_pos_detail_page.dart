@@ -716,6 +716,7 @@ class _InteractivePosDesktopCardState extends State<_InteractivePosDesktopCard> 
     final cardWidth = widget.aspectRatio > 1.5 ? 540.0 : 360.0;
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       child: MouseRegion(

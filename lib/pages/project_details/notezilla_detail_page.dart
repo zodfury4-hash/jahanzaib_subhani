@@ -786,6 +786,7 @@ class _InteractiveNoteZillaCardState extends State<_InteractiveNoteZillaCard> {
     final bytes = AiNoteZillaBytes.getBytes(widget.imagePath);
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       child: MouseRegion(

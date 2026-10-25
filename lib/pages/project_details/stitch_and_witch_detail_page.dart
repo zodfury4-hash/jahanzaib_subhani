@@ -726,6 +726,7 @@ class _InteractiveStitchCardState extends State<_InteractiveStitchCard> {
     final bytes = StitchBytes.getBytes(widget.imagePath);
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
       child: MouseRegion(
