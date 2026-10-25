@@ -1,3 +1,4 @@
+import '../../widgets/fullscreen_image_viewer.dart';
 import 'dart:ui';
 import '../../utils/locki_bytes.dart';
 import 'package:flutter/material.dart';
@@ -698,8 +699,11 @@ class _InteractiveLockiCardState extends State<_InteractiveLockiCard> {
     final filename = widget.imagePath.split('/').last;
     final bytes = lockiScreensBytes[filename];
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
+    return GestureDetector(
+      onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
@@ -764,6 +768,7 @@ class _InteractiveLockiCardState extends State<_InteractiveLockiCard> {
               child: Text(widget.caption),
             ),
           ],
+        ),
         ),
       ),
     );

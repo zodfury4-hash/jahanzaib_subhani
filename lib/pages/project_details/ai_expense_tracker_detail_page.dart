@@ -1,3 +1,4 @@
+import '../../widgets/fullscreen_image_viewer.dart';
 import 'dart:ui';
 import '../../utils/expense_tracker_bytes.dart';
 import 'package:flutter/material.dart';
@@ -422,8 +423,11 @@ class _InteractiveAppCardState extends State<_InteractiveAppCard> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
+    return GestureDetector(
+      onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
@@ -489,6 +493,7 @@ class _InteractiveAppCardState extends State<_InteractiveAppCard> {
               child: Text(widget.caption),
             ),
           ],
+        ),
         ),
       ),
     );

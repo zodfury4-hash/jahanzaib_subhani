@@ -1,3 +1,4 @@
+import '../../widgets/fullscreen_image_viewer.dart';
 import '../../utils/ai_notezilla_bytes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -784,8 +785,11 @@ class _InteractiveNoteZillaCardState extends State<_InteractiveNoteZillaCard> {
   Widget build(BuildContext context) {
     final bytes = AiNoteZillaBytes.getBytes(widget.imagePath);
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
+    return GestureDetector(
+      onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
@@ -850,6 +854,7 @@ class _InteractiveNoteZillaCardState extends State<_InteractiveNoteZillaCard> {
               child: Text(widget.caption),
             ),
           ],
+        ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import '../../widgets/fullscreen_image_viewer.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -724,8 +725,11 @@ class _InteractiveStitchCardState extends State<_InteractiveStitchCard> {
   Widget build(BuildContext context) {
     final bytes = StitchBytes.getBytes(widget.imagePath);
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
+    return GestureDetector(
+      onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
@@ -790,6 +794,7 @@ class _InteractiveStitchCardState extends State<_InteractiveStitchCard> {
               child: Text(widget.caption),
             ),
           ],
+        ),
         ),
       ),
     );

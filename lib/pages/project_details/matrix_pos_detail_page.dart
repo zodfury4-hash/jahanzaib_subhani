@@ -1,3 +1,4 @@
+import '../../widgets/fullscreen_image_viewer.dart';
 import 'package:flutter/gestures.dart';
 import '../../utils/matrix_pos_bytes.dart';
 import 'package:flutter/material.dart';
@@ -714,8 +715,11 @@ class _InteractivePosDesktopCardState extends State<_InteractivePosDesktopCard> 
     // Desktop monitor card width
     final cardWidth = widget.aspectRatio > 1.5 ? 540.0 : 360.0;
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
+    return GestureDetector(
+      onDoubleTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      onTap: () => FullScreenImageViewer.open(context, imagePath: widget.imagePath, caption: widget.caption),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
@@ -839,6 +843,7 @@ class _InteractivePosDesktopCardState extends State<_InteractivePosDesktopCard> 
               ),
             ),
           ],
+        ),
         ),
       ),
     );
